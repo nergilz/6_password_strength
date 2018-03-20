@@ -22,6 +22,11 @@ python3 password_strength.py
  input user password: <your password>
 ```
 
+### for print help
+```bash
+python3 password_strength.py --help
+```
+
 ### example input
 ```bash
  strength for your password: 10

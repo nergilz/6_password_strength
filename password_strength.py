@@ -4,14 +4,14 @@ import getpass
 import argparse
 
 
-def load_bad_list(path):
+def load_black_list(path):
     with open(path, 'r') as file_handler:
-        bad_list = file_handler.read()
-        return list(bad_list.split())
+        black_list = list(file_handler.read().split())
+        return black_list
 
 
-def check_for_bad_list(password, dad_list):
-    if password in dad_list:
+def check_for_black_list(password, black_list):
+    if password in black_list:
         return -1
     else:
         return 1
@@ -52,9 +52,9 @@ def check_for_punctuation(password):
         return 1
 
 
-def get_password_strength(password, bad_list):
+def check_password_strength(password, black_list):
     list_strength = list()
-    list_strength.append(check_for_bad_list(password, bad_list))
+    list_strength.append(check_for_black_list(password, black_list))
     list_strength.append(check_for_upper(password))
     list_strength.append(check_for_digit(password))
     list_strength.append(check_for_len(password))
@@ -84,8 +84,8 @@ if __name__ == '__main__':
     try:
         argument = get_parser_args()
         password = getpass.getpass(' input user password: ')
-        bad_list = load_bad_list(argument.path)
-        password_strength = (get_password_strength(password, bad_list))
+        black_list = load_black_list(argument.path)
+        password_strength = (check_password_strength(password, black_list))
         pprint_strength(password_strength)
     except FileNotFoundError:
         print(' ERROR: file "{}" not found'.format(argument.path))
