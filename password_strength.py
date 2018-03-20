@@ -32,21 +32,21 @@ def check_for_digit(password):
 
 
 def check_for_len(password):
-    l = len(password)
-    if l <= 5:
+    password_length = len(password)
+    if password_length <= 5:
         return -4
-    elif l > 5 and l <= 8:
+    elif password_length > 5 and password_length <= 8:
         return 1
-    elif l > 10:
+    elif password_length > 10:
         return 4
     else:
         return 2
 
 
 def check_for_punctuation(password):
-    punct = string.punctuation
+    punctuation = string.punctuation
     alpha_list = re.findall(r'.', password)
-    if punct in alpha_list:
+    if punctuation in alpha_list:
         return 3
     else:
         return 1
@@ -69,12 +69,12 @@ def pprint_strength(password_strength):
 
 
 def get_parser_args():
-    parser = argparse.ArgumentParser(description='bad list with passwords')
+    parser = argparse.ArgumentParser(description='black list with passwords')
     parser.add_argument(
         'path',
         nargs='?',
         default='password.lst',
-        help='this is path for bad list',
+        help='this is path for black list',
     )
     path = parser.parse_args()
     return path
