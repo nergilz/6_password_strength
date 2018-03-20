@@ -6,7 +6,7 @@
 ### description:
 + run the script without the path
 + you can specify the path to the file with a list of password
-+ you can download the file here: [bad_list](https://github.com/nergilz/6_password_strength.py/password.lst) 
++ you can download the file here: [bad_list](https://github.com/nergilz/6_password_strength.py/blob/master/password.lst) 
 
 ### script start example
 ```bash
