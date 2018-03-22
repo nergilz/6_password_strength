@@ -71,7 +71,6 @@ if __name__ == '__main__':
     try:
         arguments = get_parser_args()
         password = getpass.getpass(' input user password: ')
-        print(password)
         black_list = load_black_list(arguments.path)
         password_strength = (get_password_strength(password, black_list))
         pprint_strength(password_strength)
