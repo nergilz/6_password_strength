@@ -9,8 +9,8 @@ def load_black_list(path):
         return black_list
 
 
-def is_psw_in_black_list(password, black_list):
-    return -1 if password in black_list else 1
+def is_password_in_black_list(password, black_list):
+    return -4 if password in black_list else 1
 
 
 def has_upper(password):
@@ -26,22 +26,28 @@ def length_check(password):
     min_len = 5
     middle_len = 8
     max_len = 10
-    return -4 if password_length <= min_len \
-        else 1 if password_length > min_len and password_length <= middle_len \
-        else 3 if password_length > max_len else 2
+    if password_length <= min_len:
+        analyze = -4
+    elif password_length > min_len and password_length <= middle_len:
+        analyze = 1
+    elif password_length > middle_len and password_length <= max_len:
+        analyze = 2
+    else:
+        analyze = 3
+    return analyze
 
 
-def is_punctuation_in_psw(password):
+def is_punctuation_in_password(password):
     return 2 if re.search(r'\W', password) else 1
 
 
 def get_password_strength(password, black_list):
     return sum([
-        is_psw_in_black_list(password, black_list),
+        is_password_in_black_list(password, black_list),
         has_upper(password),
         has_digit(password),
         length_check(password),
-        is_punctuation_in_psw(password)
+        is_punctuation_in_password(password)
         ])
 
 
@@ -65,6 +71,7 @@ if __name__ == '__main__':
     try:
         arguments = get_parser_args()
         password = getpass.getpass(' input user password: ')
+        print(password)
         black_list = load_black_list(arguments.path)
         password_strength = (get_password_strength(password, black_list))
         pprint_strength(password_strength)
